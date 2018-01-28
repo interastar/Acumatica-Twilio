@@ -14,7 +14,7 @@ namespace PX.Objects.TW
 
         public PXSetup<TwilioNotificationSetup> TwilioSetupInfo;
 
-        #endregion
+        #endregion Selects/Views
 
         #region Constructor
 
@@ -26,11 +26,11 @@ namespace PX.Objects.TW
             Base.action.AddMenuAction(SendCallNotification);
         }
 
-        #endregion
+        #endregion Constructor
 
         #region BLC Events
 
-        //Configure UI 
+        //Configure UI
         protected virtual void ARInvoice_RowSelected(PXCache sender, PXRowSelectedEventArgs e, PXRowSelected InvokeBaseHandler)
         {
             if (InvokeBaseHandler != null)
@@ -47,7 +47,7 @@ namespace PX.Objects.TW
             SendCallNotification.SetEnabled(enabled);
         }
 
-        #endregion
+        #endregion BLC Events
 
         #region Actions
 
@@ -85,7 +85,7 @@ namespace PX.Objects.TW
             return adapter.Get();
         }
 
-        #endregion
+        #endregion Actions
 
         #region Private helpers
 
@@ -121,12 +121,12 @@ namespace PX.Objects.TW
                     throw new PXException(Messages.CallNotificationIDNotSpecified);
             }
             else
-                throw new PXException(Messages.UNSpecifiedTwilioNotificationType);
+                throw new PXException(Messages.UnspecifiedTwilioNotificationType);
 
             //Get the notification
             PX.SM.Notification notification = PXSelect<PX.SM.Notification,
                                     Where<PX.SM.Notification.notificationID, Equal<Required<PX.SM.Notification.notificationID>>>>.
-                                    Select(invGraph, invGraphExt.TwilioSetupInfo.Current.SMSNotificationID);
+                                    Select(invGraph, iNotificationID);
 
             if (notification == null)
                 throw new PXException(Messages.NotificationNotFound);
@@ -157,7 +157,7 @@ namespace PX.Objects.TW
                 twilio.SendCall(contact.Phone1, PX.Data.Search.SearchService.Html2PlainText(bodyNotification));
             }
             else
-                throw new PXException(Messages.UNSpecifiedTwilioNotificationType);
+                throw new PXException(Messages.UnspecifiedTwilioNotificationType);
 
             //Create Activity in Acumataica
             CreateTwilioNotificationActivity(invGraph, subjectNotification, bodyNotification);
@@ -195,7 +195,7 @@ namespace PX.Objects.TW
             }
         }
 
-        #endregion
+        #endregion Private helpers
     }
 
     public class TwilioNotificationType

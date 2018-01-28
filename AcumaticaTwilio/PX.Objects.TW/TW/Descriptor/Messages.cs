@@ -14,6 +14,6 @@ namespace PX.Objects.TW
         public const string NotificationNotFound = "Specified Notification is not found.";
         public const string SMSSubjectPrefix = "SMS Notification";
         public const string CallSubjectPrefix = "Out-bound call Notification";
-        public const string UNSpecifiedTwilioNotificationType = "Specified Twilio Notification Type is not valid.";
+        public const string UnspecifiedTwilioNotificationType = "Specified Twilio Notification Type is not valid.";
     }
 }
